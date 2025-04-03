@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김민준 & 이지은의 결혼식에 초대합니다</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .header {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/api/placeholder/400/600') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .names {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .invitation {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+        
+        .date {
+            font-size: 1.3rem;
+            margin-top: 20px;
+            font-weight: 400;
+        }
+        
+        .section {
+            padding: 50px 25px;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            font-weight: 500;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 1px;
+            background-color: #ccc;
+        }
+        
+        .message {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .info {
+            margin-top: 30px;
+            background-color: #fff;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .info-item {
+            margin-bottom: 25px;
+        }
+        
+        .info-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #222;
+            font-weight: 500;
+        }
+        
+        .map-container {
+            height: 250px;
+            background-color: #eee;
+            margin: 20px 0;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .contact {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            text-align: center;
+        }
+        
+        .contact-name {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #f5f5f5;
+            color: #333;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+        
+        .family {
+            margin-top: 40px;
+        }
+        
+        .family-group {
+            margin-bottom: 30px;
+        }
+        
+        .family-title {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .family-members {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .calendar-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .calendar-btn:hover {
+            background-color: #333;
+        }
+        
+        .footer {
+            padding: 30px 20px;
+            background-color: #f1f1f1;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+        }
+        
+        .heart-animation {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            25% {
+                opacity: 0.8;
+            }
+            75% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(-100px) translateX(20px);
+                opacity: 0;
+            }
+        }
+        
+        .countdown {
+            margin: 20px 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .countdown-item {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            min-width: 60px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .countdown-number {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        
+        .countdown-label {
+            font-size: 0.7rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="overlay"></div>
+            <div class="header-content">
+                <div class="names">김민준 & 이지은</div>
+                <div class="invitation">
+                    서로 다른 두 사람이 만나<br>
+                    하나의 길을 걸어가려 합니다.<br>
+                    소중한 분들을 모시고<br>
+                    작은 결혼식을 올리려 합니다.<br>
+                    함께하셔서 자리를 빛내주세요.
+                </div>
+                <div class="date">2025년 5월 17일 토요일 오후 2시</div>
+            </div>
+        </header>
+        
+        <section class="section">
+            <h2 class="section-title">초대합니다</h2>
+            <p class="message">
+                사랑은 기다림, 때로는 인내였습니다.<br>
+                서로를 알아가며 함께한 시간들이<br>
+                이제 평생의 약속으로 이어집니다.<br>
+                소중한 분들과 함께 나누고 싶은<br>
+                특별한 날에 함께해 주세요.
+            </p>
+            
+            <div class="gallery">
+                <img src="/api/placeholder/200/300" alt="웨딩 사진 1">
+                <img src="/api/placeholder/200/300" alt="웨딩 사진 2">
+                <img src="/api/placeholder/200/300" alt="웨딩 사진 3">
+                <img src="/api/placeholder/200/300" alt="웨딩 사진 4">
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">D-Day</h2>
+            <div class="countdown">
+                결혼식까지 남은 시간
+                <div class="countdown-timer">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">44</div>
+                        <div class="countdown-label">일</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">12</div>
+                        <div class="countdown-label">시간</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">30</div>
+                        <div class="countdown-label">분</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">초</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="calendar-btn">캘린더에 저장하기</a>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">오시는 길</h2>
+            <div class="info">
+                <div class="info-item">
+                    <div class="info-title">그랜드 웨딩홀 3층 플라워홀</div>
+                    <div>서울특별시 강남구 테헤란로 123</div>
+                </div>
+                
+                <div class="map-container">
+                    <img class="map-placeholder" src="/api/placeholder/400/250" alt="지도">
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-title">지하철</div>
+                    <div>2호선 강남역 3번 출구에서 도보 5분</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-title">버스</div>
+                    <div>간선버스: 146, 341, 360<br>지선버스: 4312, 4419</div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-title">주차</div>
+                    <div>웨딩홀 지하 주차장 이용 가능<br>(2시간 무료)</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">연락처</h2>
+            <div class="contact">
+                <div class="contact-item">
+                    <div class="contact-name">신랑에게 연락하기</div>
+                    <a href="tel:01012345678" class="contact-btn">전화</a>
+                    <a href="sms:01012345678" class="contact-btn">문자</a>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-name">신부에게 연락하기</div>
+                    <a href="tel:01087654321" class="contact-btn">전화</a>
+                    <a href="sms:01087654321" class="contact-btn">문자</a>
+                </div>
+            </div>
+            
+            <div class="family">
+                <div class="family-group">
+                    <div class="family-title">신랑측 혼주</div>
+                    <div class="family-members">
+                        아버지 김철수 · 어머니 박영희
+                    </div>
+                </div>
+                <div class="family-group">
+                    <div class="family-title">신부측 혼주</div>
+                    <div class="family-members">
+                        아버지 이상호 · 어머니 최미영
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="footer">
+            김민준 & 이지은의 모바일 청첩장<br>
+            © 2025 All Rights Reserved
+        </footer>
+    </div>
+    
+    <script>
+        // 하트 애니메이션 효과
+        function createHearts() {
+            const header = document.querySelector('.header');
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.classList.add('heart-animation');
+            
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random() * 0.5 + 0.3;
+            heart.style.fontSize = Math.random() * 1 + 0.5 + 'rem';
+            
+            header.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        
+        // 3초마다 하트 생성
+        setInterval(createHearts, 3000);
+        
+        // 초기 하트 생성
+        for(let i = 0; i < 5; i++) {
+            setTimeout(createHearts, 300 * i);
+        }
+        
+        // 카운트다운 타이머
+        const weddingDate = new Date('2025-05-17T14:00:00');
+        
+        function updateCountdown() {
+            const now = new Date();
+            const diff = weddingDate - now;
+            
+            if(diff <= 0) {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+        
+        // 1초마다 카운트다운 업데이트
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
